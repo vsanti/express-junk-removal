@@ -1,0 +1,1063 @@
+# Express Junk Removal Homepage Redesign — Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Build a high-converting, SEO-optimized, mobile-first homepage for Express Junk Removal that positions the company as a full-service hauling & delivery company with two equal service pillars: construction material delivery and junk removal.
+
+**Architecture:** Single standalone HTML file (`index.html`) with all CSS embedded in a `<style>` block and minimal JS in a `<script>` block. No build tools, no external dependencies beyond Google Fonts. SVG icons inline for zero network requests. Designed mobile-first with breakpoints at 768px and 1024px.
+
+**Tech Stack:** HTML5, CSS3 (custom properties, flexbox, grid), vanilla JavaScript, Google Fonts (Inter), inline SVGs, JSON-LD structured data.
+
+**Spec:** `docs/superpowers/specs/2026-04-13-homepage-redesign-design.md`
+
+---
+
+## File Structure
+
+- **Create:** `index.html` — the complete homepage (HTML + embedded CSS + embedded JS)
+
+That's it. One file, zero dependencies beyond Google Fonts CDN.
+
+---
+
+### Task 1: HTML Document Shell, Meta Tags & Structured Data
+
+**Files:**
+- Create: `index.html`
+
+This task creates the HTML document with all `<head>` content: meta tags for SEO, Open Graph, Google Fonts link, CSS custom properties, and JSON-LD structured data. No visible content yet — just the foundation.
+
+- [ ] **Step 1: Create `index.html` with document head**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Construction Material Delivery & Junk Removal | Idaho Falls, East Idaho | Express Junk Removal</title>
+  <meta name="description" content="Same-day construction delivery and junk removal in Idaho Falls, Pocatello, Rexburg, Rigby, Shelley & Blackfoot. Free estimates, no hidden fees. Call (208) 240-1007.">
+  <link rel="canonical" href="https://expressjunk-removal.com/">
+  <meta property="og:title" content="Express Junk Removal — Hauling & Delivery in East Idaho">
+  <meta property="og:description" content="Same-day construction delivery and junk removal in Idaho Falls, Pocatello, Rexburg & surrounding areas.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://expressjunk-removal.com/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Express Junk Removal",
+    "telephone": "+1-208-240-1007",
+    "email": "expressjunkremoval208@gmail.com",
+    "url": "https://expressjunk-removal.com",
+    "areaServed": [
+      { "@type": "City", "name": "Idaho Falls", "containedInPlace": { "@type": "State", "name": "Idaho" } },
+      { "@type": "City", "name": "Rigby", "containedInPlace": { "@type": "State", "name": "Idaho" } },
+      { "@type": "City", "name": "Pocatello", "containedInPlace": { "@type": "State", "name": "Idaho" } },
+      { "@type": "City", "name": "Rexburg", "containedInPlace": { "@type": "State", "name": "Idaho" } },
+      { "@type": "City", "name": "Shelley", "containedInPlace": { "@type": "State", "name": "Idaho" } },
+      { "@type": "City", "name": "Blackfoot", "containedInPlace": { "@type": "State", "name": "Idaho" } }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "4",
+      "bestRating": "5"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Construction Material Delivery",
+            "description": "Dump truck delivery of gravel, sand, topsoil, fill dirt, lumber, drywall, and concrete blocks across East Idaho."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Junk Removal & Cleanout",
+            "description": "Full-service residential and commercial junk removal, estate cleanouts, furniture and appliance removal in East Idaho."
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://expressjunk-removal.com/" }
+    ]
+  }
+  </script>
+
+  <style>
+    /* === CSS Custom Properties === */
+    :root {
+      --color-primary: #1B3A5C;
+      --color-green: #2ECC71;
+      --color-green-hover: #27AE60;
+      --color-orange: #E67E22;
+      --color-bg: #F8F9FA;
+      --color-surface: #FFFFFF;
+      --color-text: #1A1A2E;
+      --color-muted: #6C757D;
+      --font: 'Inter', sans-serif;
+      --max-width: 1200px;
+      --radius: 8px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    /* === Reset === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); font-size: 16px; line-height: 1.6; color: var(--color-text); background: var(--color-surface); }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+  </style>
+</head>
+<body>
+</body>
+</html>
+```
+
+- [ ] **Step 2: Open in browser and verify**
+
+Open `index.html` in the browser. Verify:
+- Page title shows in the tab: "Construction Material Delivery & Junk Removal | Idaho Falls, East Idaho | Express Junk Removal"
+- Blank white page (no visible content yet)
+- No console errors
+
+---
+
+### Task 2: Sticky Header
+
+**Files:**
+- Modify: `index.html`
+
+Add the sticky header with logo text, navigation with Services dropdown, phone number, and Get Quote button. Mobile: hamburger menu with tap-to-call.
+
+- [ ] **Step 1: Add header HTML inside `<body>`**
+
+```html
+<header class="header" id="header">
+  <div class="header__inner">
+    <a href="/" class="header__logo">Express Junk Removal</a>
+    <nav class="header__nav" id="nav" aria-label="Main navigation">
+      <ul class="header__menu">
+        <li><a href="/">Home</a></li>
+        <li class="header__dropdown">
+          <a href="#services" aria-haspopup="true">Services</a>
+          <ul class="header__submenu">
+            <li><a href="#services">Construction Material Delivery</a></li>
+            <li><a href="#services">Junk Removal &amp; Cleanout</a></li>
+          </ul>
+        </li>
+        <li><a href="https://expressjunk-removal.com/about-us/">About</a></li>
+        <li><a href="https://expressjunk-removal.com/contact-us/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header__actions">
+      <a href="tel:2082401007" class="header__phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (208) 240-1007
+      </a>
+      <a href="#quote-form" class="btn btn--green">Get Quote</a>
+    </div>
+    <button class="header__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+```
+
+- [ ] **Step 2: Add header CSS inside `<style>`**
+
+```css
+/* === Header === */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--color-surface);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.header__inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 64px;
+}
+.header__logo {
+  font-size: 20px; font-weight: 700; color: var(--color-primary);
+  white-space: nowrap;
+}
+.header__nav { display: none; }
+.header__menu { display: flex; gap: 28px; }
+.header__menu > li > a { font-size: 15px; font-weight: 600; color: var(--color-text); transition: color 0.2s; }
+.header__menu > li > a:hover { color: var(--color-primary); }
+.header__dropdown { position: relative; }
+.header__submenu {
+  display: none; position: absolute; top: 100%; left: 0;
+  background: var(--color-surface); box-shadow: var(--shadow);
+  border-radius: var(--radius); padding: 8px 0; min-width: 260px; z-index: 10;
+}
+.header__dropdown:hover .header__submenu { display: block; }
+.header__submenu a { display: block; padding: 8px 20px; font-size: 14px; white-space: nowrap; }
+.header__submenu a:hover { background: var(--color-bg); color: var(--color-primary); }
+.header__actions { display: none; align-items: center; gap: 16px; }
+.header__phone { display: flex; align-items: center; gap: 6px; font-weight: 600; color: var(--color-orange); font-size: 15px; }
+
+/* Mobile hamburger */
+.header__hamburger {
+  display: flex; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.header__hamburger span {
+  display: block; width: 24px; height: 2px; background: var(--color-text);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.header__hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.header__hamburger.active span:nth-child(2) { opacity: 0; }
+.header__hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav open state */
+.header__nav.open {
+  display: flex; flex-direction: column;
+  position: absolute; top: 64px; left: 0; right: 0;
+  background: var(--color-surface); box-shadow: var(--shadow);
+  padding: 20px;
+}
+.header__nav.open .header__menu { flex-direction: column; gap: 0; }
+.header__nav.open .header__menu > li > a { display: block; padding: 12px 0; border-bottom: 1px solid var(--color-bg); }
+.header__nav.open .header__submenu {
+  display: block; position: static; box-shadow: none; padding: 0 0 0 16px;
+}
+.header__nav.open .header__submenu a { padding: 8px 0; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 12px 24px; border-radius: var(--radius); font-size: 15px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s;
+  min-height: 48px; border: 2px solid transparent;
+}
+.btn--green { background: var(--color-green); color: #fff; border-color: var(--color-green); }
+.btn--green:hover { background: var(--color-green-hover); border-color: var(--color-green-hover); }
+.btn--outline { background: transparent; color: var(--color-primary); border-color: var(--color-primary); }
+.btn--outline:hover { background: var(--color-primary); color: #fff; }
+.btn--white-outline { background: transparent; color: #fff; border-color: #fff; }
+.btn--white-outline:hover { background: #fff; color: var(--color-primary); }
+
+/* Mobile phone icon (visible only on mobile, next to hamburger) */
+.header__mobile-phone {
+  display: flex; align-items: center; color: var(--color-orange);
+}
+
+@media (min-width: 768px) {
+  .header__inner { height: 72px; }
+  .header__nav { display: flex; }
+  .header__actions { display: flex; }
+  .header__hamburger { display: none; }
+  .header__mobile-phone { display: none; }
+}
+```
+
+- [ ] **Step 3: Update the header HTML to add mobile phone icon before hamburger**
+
+Insert this just before the hamburger button:
+
+```html
+    <a href="tel:2082401007" class="header__mobile-phone" aria-label="Call (208) 240-1007">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </a>
+```
+
+- [ ] **Step 4: Verify header in browser**
+
+Open in browser. Check:
+- Desktop (>768px): Logo left, nav center, phone + Get Quote button right
+- Mobile (<768px): Logo left, phone icon + hamburger right
+- Hamburger doesn't work yet (JS comes in a later task)
+
+---
+
+### Task 3: Hero Section with Quote Form
+
+**Files:**
+- Modify: `index.html`
+
+Add the hero section: left side headline + CTAs, right side quote form. Uses a CSS gradient background as a placeholder for the hero image (the real image can be swapped in later).
+
+- [ ] **Step 1: Add hero HTML after `</header>`**
+
+```html
+<section class="hero" id="hero">
+  <div class="hero__overlay"></div>
+  <div class="hero__inner">
+    <div class="hero__content">
+      <h1 class="hero__title">East Idaho's Full-Service Hauling &amp; Delivery Company</h1>
+      <p class="hero__subtitle">Construction material delivery and junk removal across Idaho Falls, Pocatello, Rexburg, and surrounding areas. Same-day service available.</p>
+      <div class="hero__ctas">
+        <a href="tel:2082401007" class="btn btn--green">Call (208) 240-1007</a>
+        <a href="#quote-form" class="btn btn--white-outline">Get Free Quote</a>
+      </div>
+    </div>
+    <div class="hero__form" id="quote-form">
+      <h2 class="hero__form-title">Get a Free Quote Today!</h2>
+      <form class="quote-form" id="quoteForm">
+        <div class="quote-form__field">
+          <label for="qf-name">Name</label>
+          <input type="text" id="qf-name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="quote-form__field">
+          <label for="qf-email">Email</label>
+          <input type="email" id="qf-email" name="email" placeholder="you@email.com" required>
+        </div>
+        <div class="quote-form__field">
+          <label for="qf-phone">Phone Number</label>
+          <input type="tel" id="qf-phone" name="phone" placeholder="(208) 555-1234" required>
+        </div>
+        <div class="quote-form__field">
+          <label for="qf-area">Service Area</label>
+          <input type="text" id="qf-area" name="service_area" placeholder="e.g. Idaho Falls">
+        </div>
+        <div class="quote-form__row">
+          <div class="quote-form__field">
+            <label for="qf-date">Desired Service Date</label>
+            <input type="date" id="qf-date" name="service_date">
+          </div>
+          <div class="quote-form__field">
+            <label for="qf-time">Desired Service Time</label>
+            <input type="time" id="qf-time" name="service_time">
+          </div>
+        </div>
+        <fieldset class="quote-form__field quote-form__radios">
+          <legend>Service Type</legend>
+          <label><input type="radio" name="service_type" value="construction_delivery"> Construction Delivery</label>
+          <label><input type="radio" name="service_type" value="junk_removal" checked> Junk Removal</label>
+          <label><input type="radio" name="service_type" value="dumpster_rental"> Roll Off Dumpster Rental</label>
+        </fieldset>
+        <div class="quote-form__field">
+          <label for="qf-images">Upload Images</label>
+          <input type="file" id="qf-images" name="images" accept="image/*" multiple>
+        </div>
+        <button type="submit" class="btn btn--green quote-form__submit">GET QUOTE NOW!</button>
+      </form>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add hero CSS**
+
+```css
+/* === Hero === */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a2e 0%, #1b3a5c 50%, #2c5f8a 100%);
+  min-height: 600px;
+  display: flex; align-items: center;
+  padding: 48px 20px;
+}
+.hero__overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 1;
+}
+.hero__inner {
+  position: relative; z-index: 2;
+  max-width: var(--max-width); margin: 0 auto; width: 100%;
+  display: flex; flex-direction: column; gap: 32px;
+}
+.hero__content { color: #fff; }
+.hero__title { font-size: 32px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+.hero__subtitle { font-size: 17px; line-height: 1.6; opacity: 0.9; margin-bottom: 24px; max-width: 540px; }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero__form {
+  background: var(--color-primary); border-radius: var(--radius);
+  padding: 28px 24px;
+}
+.hero__form-title { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 20px; text-align: center; }
+.quote-form { display: flex; flex-direction: column; gap: 12px; }
+.quote-form__field { display: flex; flex-direction: column; gap: 4px; }
+.quote-form__field label, .quote-form__radios legend {
+  color: #fff; font-size: 13px; font-weight: 600;
+}
+.quote-form__field input[type="text"],
+.quote-form__field input[type="email"],
+.quote-form__field input[type="tel"],
+.quote-form__field input[type="date"],
+.quote-form__field input[type="time"] {
+  padding: 10px 12px; border-radius: 4px; border: none;
+  font-size: 15px; font-family: var(--font); color: var(--color-text);
+  background: #fff;
+}
+.quote-form__field input[type="file"] { color: #fff; font-size: 13px; }
+.quote-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.quote-form__radios { border: none; display: flex; flex-direction: column; gap: 6px; }
+.quote-form__radios legend { margin-bottom: 4px; }
+.quote-form__radios label { color: #fff; font-size: 14px; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.quote-form__submit { width: 100%; margin-top: 4px; font-size: 18px; }
+
+@media (min-width: 1024px) {
+  .hero { padding: 80px 20px; min-height: 650px; }
+  .hero__inner { flex-direction: row; align-items: center; gap: 48px; }
+  .hero__content { flex: 1; }
+  .hero__title { font-size: 48px; }
+  .hero__form { flex: 0 0 420px; }
+}
+```
+
+- [ ] **Step 3: Verify hero in browser**
+
+Open in browser. Check:
+- Desktop: headline + CTAs on left, form on right
+- Mobile: headline + CTAs stacked above form
+- Form fields all visible and functional
+- "Call" button is a tappable tel: link
+- "Get Free Quote" scrolls to form section
+
+---
+
+### Task 4: Trust Bar
+
+**Files:**
+- Modify: `index.html`
+
+Add the horizontal trust bar with five value props and inline SVG icons.
+
+- [ ] **Step 1: Add trust bar HTML after `</section>` (hero)**
+
+```html
+<section class="trust-bar">
+  <div class="trust-bar__inner">
+    <div class="trust-bar__item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Same-Day Delivery</span>
+    </div>
+    <div class="trust-bar__item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <span>Free Estimates</span>
+    </div>
+    <div class="trust-bar__item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>Locally Owned</span>
+    </div>
+    <div class="trust-bar__item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Licensed &amp; Insured</span>
+    </div>
+    <div class="trust-bar__item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <span>No Hidden Fees</span>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add trust bar CSS**
+
+```css
+/* === Trust Bar === */
+.trust-bar { background: var(--color-bg); padding: 20px; }
+.trust-bar__inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+}
+.trust-bar__item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600; color: var(--color-primary);
+}
+.trust-bar__item svg { flex-shrink: 0; color: var(--color-primary); }
+
+@media (min-width: 768px) {
+  .trust-bar__inner { grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .trust-bar__item { justify-content: center; font-size: 14px; }
+}
+```
+
+- [ ] **Step 3: Verify trust bar in browser**
+
+Check: 5 items with icons in a row on desktop, 2-column grid on mobile. Navy color, light gray background.
+
+---
+
+### Task 5: Services Section
+
+**Files:**
+- Modify: `index.html`
+
+Two equal service cards side by side with icons, descriptions, bullet points, and CTAs.
+
+- [ ] **Step 1: Add services HTML after trust bar**
+
+```html
+<section class="services" id="services">
+  <div class="services__inner">
+    <h2 class="section-title">Our Services</h2>
+    <div class="services__grid">
+      <div class="service-card">
+        <div class="service-card__icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/><path d="M5 3 L3 10 L13 10 L11 3" opacity="0.4"/></svg>
+        </div>
+        <h3>Construction Material Delivery</h3>
+        <p>We deliver aggregates and building materials directly to your job site across East Idaho. Dump truck delivery on your schedule — same-day and next-day available.</p>
+        <ul class="service-card__list">
+          <li>Gravel &amp; crushed rock</li>
+          <li>Sand &amp; topsoil</li>
+          <li>Fill dirt</li>
+          <li>Lumber &amp; drywall</li>
+          <li>Concrete blocks &amp; masonry</li>
+          <li>Same-day &amp; next-day available</li>
+        </ul>
+        <a href="#quote-form" class="btn btn--green">Request Delivery Quote</a>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 6 21 18 21 19 6 21 6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+        </div>
+        <h3>Junk Removal &amp; Cleanout</h3>
+        <p>Full-service junk removal for homes and businesses across East Idaho. We handle the heavy lifting so you don't have to — eco-friendly disposal included.</p>
+        <ul class="service-card__list">
+          <li>House, garage &amp; estate cleanouts</li>
+          <li>Furniture &amp; appliance removal</li>
+          <li>Commercial junk removal</li>
+          <li>Construction debris removal</li>
+          <li>Eco-friendly recycling</li>
+        </ul>
+        <a href="#quote-form" class="btn btn--green">Request Removal Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add services CSS**
+
+```css
+/* === Section Titles === */
+.section-title {
+  font-size: 28px; font-weight: 700; text-align: center;
+  margin-bottom: 40px; color: var(--color-text);
+}
+
+/* === Services === */
+.services { padding: 48px 20px; background: var(--color-surface); }
+.services__inner { max-width: var(--max-width); margin: 0 auto; }
+.services__grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+.service-card {
+  background: var(--color-surface); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.service-card__icon { color: var(--color-primary); }
+.service-card h3 { font-size: 20px; font-weight: 700; color: var(--color-primary); }
+.service-card p { color: var(--color-muted); font-size: 15px; }
+.service-card__list { display: flex; flex-direction: column; gap: 8px; padding-left: 0; }
+.service-card__list li {
+  position: relative; padding-left: 24px; font-size: 15px; color: var(--color-text);
+}
+.service-card__list li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--color-green);
+}
+.service-card .btn { align-self: flex-start; margin-top: auto; }
+
+@media (min-width: 768px) {
+  .services { padding: 80px 20px; }
+  .section-title { font-size: 36px; }
+  .services__grid { grid-template-columns: 1fr 1fr; }
+  .service-card h3 { font-size: 24px; }
+}
+```
+
+- [ ] **Step 3: Verify services in browser**
+
+Check: Two cards side by side on desktop, stacked on mobile. Green bullet dots, green CTA buttons, card shadows.
+
+---
+
+### Task 6: How It Works Section
+
+**Files:**
+- Modify: `index.html`
+
+Three-step process section with numbered steps and icons.
+
+- [ ] **Step 1: Add how-it-works HTML after services section**
+
+```html
+<section class="how-it-works">
+  <div class="how-it-works__inner">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step__number">1</div>
+        <div class="step__icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Call or Submit a Quote</h3>
+        <p>Call us at <a href="tel:2082401007">(208) 240-1007</a> or fill out our quick quote form.</p>
+      </div>
+      <div class="step">
+        <div class="step__number">2</div>
+        <div class="step__icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 10.5 14 12 16 15 13"/></svg>
+        </div>
+        <h3>We Schedule &amp; Confirm</h3>
+        <p>We confirm your date, time, and provide a transparent price.</p>
+      </div>
+      <div class="step">
+        <div class="step__number">3</div>
+        <div class="step__icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3>We Deliver or Remove</h3>
+        <p>Our crew arrives on time and gets the job done right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add how-it-works CSS**
+
+```css
+/* === How It Works === */
+.how-it-works { padding: 48px 20px; background: var(--color-bg); }
+.how-it-works__inner { max-width: var(--max-width); margin: 0 auto; }
+.steps { display: grid; grid-template-columns: 1fr; gap: 32px; }
+.step { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.step__number {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--color-green); color: #fff;
+  font-size: 18px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.step__icon { color: var(--color-primary); }
+.step h3 { font-size: 18px; font-weight: 700; color: var(--color-text); }
+.step p { font-size: 15px; color: var(--color-muted); max-width: 280px; }
+.step a { color: var(--color-orange); font-weight: 600; }
+
+@media (min-width: 768px) {
+  .how-it-works { padding: 80px 20px; }
+  .steps { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .step h3 { font-size: 20px; }
+}
+```
+
+- [ ] **Step 3: Verify in browser**
+
+Check: Three steps in a row on desktop, stacked on mobile. Green numbered circles, icons, descriptive text.
+
+---
+
+### Task 7: Service Area Section
+
+**Files:**
+- Modify: `index.html`
+
+Grid of city name badges with descriptive copy and CTA.
+
+- [ ] **Step 1: Add service area HTML after how-it-works**
+
+```html
+<section class="service-area">
+  <div class="service-area__inner">
+    <h2 class="section-title">Serving East Idaho</h2>
+    <p class="service-area__text">Proudly serving contractors and homeowners across East Idaho. From Pocatello to Rexburg, we deliver materials and remove junk on your schedule.</p>
+    <div class="service-area__badges">
+      <span class="badge">Idaho Falls</span>
+      <span class="badge">Rigby</span>
+      <span class="badge">Pocatello</span>
+      <span class="badge">Rexburg</span>
+      <span class="badge">Shelley</span>
+      <span class="badge">Blackfoot</span>
+    </div>
+    <a href="tel:2082401007" class="btn btn--outline service-area__cta">See If We Serve Your Area — Call (208) 240-1007</a>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add service area CSS**
+
+```css
+/* === Service Area === */
+.service-area { padding: 48px 20px; background: var(--color-surface); text-align: center; }
+.service-area__inner { max-width: var(--max-width); margin: 0 auto; }
+.service-area__text { font-size: 17px; color: var(--color-muted); max-width: 640px; margin: 0 auto 32px; }
+.service-area__badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 32px; }
+.badge {
+  background: var(--color-primary); color: #fff;
+  padding: 10px 24px; border-radius: 100px;
+  font-size: 15px; font-weight: 600;
+}
+.service-area__cta { margin-top: 8px; }
+
+@media (min-width: 768px) {
+  .service-area { padding: 80px 20px; }
+  .badge { padding: 12px 28px; font-size: 16px; }
+}
+```
+
+- [ ] **Step 3: Verify in browser**
+
+Check: Navy pill badges for each city, centered. CTA button below.
+
+---
+
+### Task 8: Testimonials Section
+
+**Files:**
+- Modify: `index.html`
+
+Testimonial cards with a simple CSS-only horizontal scroll carousel on mobile, grid on desktop.
+
+- [ ] **Step 1: Add testimonials HTML after service area**
+
+```html
+<section class="testimonials">
+  <div class="testimonials__inner">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <div class="testimonials__grid">
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3 class="testimonial-card__title">Very Impressed</h3>
+        <p class="testimonial-card__text">They were in and out quickly, efficiently, and sent me photos of the completed work. Very highly recommend!</p>
+        <p class="testimonial-card__author">— Jared Duncan</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3 class="testimonial-card__title">Professional</h3>
+        <p class="testimonial-card__text">Thorough, efficient, and very reasonably priced. I highly recommend them for garage cleanouts and appliance disposal.</p>
+        <p class="testimonial-card__author">— Leslie Hartley</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3 class="testimonial-card__title">Super Fast</h3>
+        <p class="testimonial-card__text">Jose did an amazing job removing junk from the basement and garage. Affordable and done super fast!</p>
+        <p class="testimonial-card__author">— Autumn Roseberg</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3 class="testimonial-card__title">Quick &amp; Efficient</h3>
+        <p class="testimonial-card__text">Quick to provide a quote and had it done within a day. I will be referring them to future clients, no questions asked!</p>
+        <p class="testimonial-card__author">— Amanda McFarland</p>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add testimonials CSS**
+
+```css
+/* === Testimonials === */
+.testimonials { padding: 48px 20px; background: var(--color-bg); }
+.testimonials__inner { max-width: var(--max-width); margin: 0 auto; }
+.testimonials__grid {
+  display: flex; gap: 20px;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+.testimonial-card {
+  background: var(--color-surface); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 28px;
+  min-width: 280px; flex-shrink: 0;
+  scroll-snap-align: start;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.testimonial-card__stars { color: var(--color-orange); font-size: 18px; }
+.testimonial-card__title { font-size: 17px; font-weight: 700; color: var(--color-text); }
+.testimonial-card__text { font-size: 14px; color: var(--color-muted); line-height: 1.5; flex: 1; }
+.testimonial-card__author { font-size: 14px; font-weight: 600; color: var(--color-primary); }
+
+@media (min-width: 768px) {
+  .testimonials { padding: 80px 20px; }
+  .testimonials__grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    overflow: visible;
+  }
+}
+@media (min-width: 1024px) {
+  .testimonials__grid { grid-template-columns: repeat(4, 1fr); }
+}
+```
+
+- [ ] **Step 3: Verify in browser**
+
+Check: 4-column grid on desktop, 2 on tablet, horizontal scroll on mobile. Star ratings in orange, card shadows.
+
+---
+
+### Task 9: Footer CTA & Footer
+
+**Files:**
+- Modify: `index.html`
+
+Navy footer CTA band and the full footer with three columns.
+
+- [ ] **Step 1: Add footer CTA HTML after testimonials**
+
+```html
+<section class="footer-cta">
+  <div class="footer-cta__inner">
+    <h2>Ready to Get Started?</h2>
+    <p>Call for a free estimate or submit a quote request online.</p>
+    <div class="footer-cta__buttons">
+      <a href="tel:2082401007" class="btn btn--green">Call (208) 240-1007</a>
+      <a href="#quote-form" class="btn btn--white-outline">Get Free Quote</a>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add footer HTML after footer CTA**
+
+```html
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__col">
+      <p class="footer__logo">Express Junk Removal</p>
+      <p class="footer__desc">East Idaho's trusted full-service hauling and delivery company. Construction material delivery and junk removal for contractors and homeowners.</p>
+    </div>
+    <div class="footer__col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="https://expressjunk-removal.com/about-us/">About Us</a></li>
+        <li><a href="#services">Construction Delivery</a></li>
+        <li><a href="#services">Junk Removal</a></li>
+        <li><a href="https://expressjunk-removal.com/contact-us/">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:2082401007">(208) 240-1007</a></li>
+        <li><a href="mailto:expressjunkremoval208@gmail.com">expressjunkremoval208@gmail.com</a></li>
+      </ul>
+      <h4 class="footer__areas-title">Service Areas</h4>
+      <p class="footer__areas">Idaho Falls &bull; Rigby &bull; Pocatello &bull; Rexburg &bull; Shelley &bull; Blackfoot</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>&copy; 2026 Express Junk Removal. Locally owned &amp; operated in East Idaho.</p>
+  </div>
+</footer>
+```
+
+- [ ] **Step 3: Add footer CTA + footer CSS**
+
+```css
+/* === Footer CTA === */
+.footer-cta {
+  background: var(--color-primary); padding: 48px 20px; text-align: center;
+}
+.footer-cta__inner { max-width: var(--max-width); margin: 0 auto; }
+.footer-cta h2 { color: #fff; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.footer-cta p { color: rgba(255,255,255,0.8); font-size: 17px; margin-bottom: 24px; }
+.footer-cta__buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+@media (min-width: 768px) {
+  .footer-cta { padding: 80px 20px; }
+  .footer-cta h2 { font-size: 36px; }
+}
+
+/* === Footer === */
+.footer { background: #111827; color: #ccc; padding: 48px 20px 0; }
+.footer__inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr; gap: 32px;
+  padding-bottom: 40px;
+}
+.footer__logo { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.footer__desc { font-size: 14px; line-height: 1.6; color: #9CA3AF; }
+.footer h4 { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+.footer__areas-title { margin-top: 16px; }
+.footer__areas { font-size: 14px; color: #9CA3AF; }
+.footer ul { display: flex; flex-direction: column; gap: 8px; }
+.footer a { color: #9CA3AF; font-size: 14px; transition: color 0.2s; }
+.footer a:hover { color: var(--color-green); }
+.footer__bottom {
+  border-top: 1px solid #1F2937; padding: 20px 0; text-align: center;
+  max-width: var(--max-width); margin: 0 auto;
+}
+.footer__bottom p { font-size: 13px; color: #6B7280; }
+
+@media (min-width: 768px) {
+  .footer__inner { grid-template-columns: 2fr 1fr 1fr; }
+}
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Check: Navy CTA band with two buttons. Dark footer with 3 columns on desktop, stacked mobile. City names in footer for SEO.
+
+---
+
+### Task 10: Mobile Sticky Bottom Bar & JavaScript
+
+**Files:**
+- Modify: `index.html`
+
+Add the mobile sticky bottom bar and all JavaScript: hamburger menu toggle, sticky bar show/hide on scroll, and smooth scroll for anchor links.
+
+- [ ] **Step 1: Add sticky bottom bar HTML before `</body>`**
+
+```html
+<div class="mobile-bar" id="mobileBar">
+  <a href="tel:2082401007" class="mobile-bar__btn mobile-bar__btn--call">Call Now</a>
+  <a href="#quote-form" class="mobile-bar__btn mobile-bar__btn--quote">Get Quote</a>
+</div>
+```
+
+- [ ] **Step 2: Add sticky bottom bar CSS**
+
+```css
+/* === Mobile Sticky Bar === */
+.mobile-bar {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  padding: 10px 16px; gap: 10px; z-index: 99;
+}
+.mobile-bar.visible { display: flex; }
+.mobile-bar__btn {
+  flex: 1; text-align: center; padding: 12px; border-radius: var(--radius);
+  font-size: 15px; font-weight: 700; text-transform: uppercase;
+}
+.mobile-bar__btn--call { background: var(--color-orange); color: #fff; }
+.mobile-bar__btn--quote { background: var(--color-green); color: #fff; }
+
+@media (min-width: 768px) {
+  .mobile-bar { display: none !important; }
+}
+```
+
+- [ ] **Step 3: Add JavaScript before `</body>`**
+
+```html
+<script>
+  // Hamburger menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    nav.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', nav.classList.contains('open'));
+  });
+
+  // Close mobile nav when a link is clicked
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      nav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Mobile sticky bar: show after hero scrolls out of view
+  const hero = document.getElementById('hero');
+  const mobileBar = document.getElementById('mobileBar');
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        mobileBar.classList.remove('visible');
+      } else {
+        mobileBar.classList.add('visible');
+      }
+    },
+    { threshold: 0 }
+  );
+  observer.observe(hero);
+</script>
+```
+
+- [ ] **Step 4: Verify all interactive behavior in browser**
+
+Check on mobile viewport:
+- Hamburger opens/closes nav with animation
+- Nav links close the menu
+- Sticky bottom bar appears when scrolling past hero
+- Sticky bar disappears when scrolling back to hero
+- "Call Now" triggers tel: link
+- "Get Quote" scrolls to form
+- Desktop: sticky bar never visible
+
+---
+
+### Task 11: Final Review & Polish
+
+**Files:**
+- Modify: `index.html`
+
+Final pass: check all links, responsive behavior, accessibility, and visual polish.
+
+- [ ] **Step 1: Test all breakpoints**
+
+Open in browser. Check at 375px (mobile), 768px (tablet), 1200px+ (desktop):
+- All sections stack properly on mobile
+- No horizontal overflow
+- Text is readable without zooming
+- Touch targets are at least 48px
+- Form is usable on mobile
+
+- [ ] **Step 2: Test all interactive elements**
+
+- Click all tel: links — should trigger phone dialer
+- Click all anchor links (#quote-form, #services) — should smooth scroll
+- Submit form with empty required fields — should show validation
+- Test hamburger menu open/close
+- Test sticky bottom bar show/hide
+
+- [ ] **Step 3: Validate HTML**
+
+Ensure:
+- Only one `<h1>` on the page
+- All images have alt text (we use SVGs inline, so n/a)
+- All form inputs have labels
+- ARIA attributes present on hamburger and star ratings
+- No broken links
+
+- [ ] **Step 4: Spot-check SEO elements**
+
+Verify in page source:
+- Title tag present and correct
+- Meta description present and correct
+- Canonical URL present
+- JSON-LD structured data present (2 blocks)
+- H1 → H2 → H3 hierarchy correct
+- City names appear in: hero subtitle, service area badges, footer
+
+---
+
+## Execution Checklist Summary
+
+| Task | Section | Est. |
+|------|---------|------|
+| 1 | Document shell, meta, structured data | 3 min |
+| 2 | Sticky header | 4 min |
+| 3 | Hero with quote form | 5 min |
+| 4 | Trust bar | 3 min |
+| 5 | Services section | 4 min |
+| 6 | How it works | 3 min |
+| 7 | Service area | 3 min |
+| 8 | Testimonials | 4 min |
+| 9 | Footer CTA + footer | 4 min |
+| 10 | Mobile sticky bar + JS | 4 min |
+| 11 | Final review | 5 min |
