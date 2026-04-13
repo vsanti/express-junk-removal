@@ -383,6 +383,25 @@
     @media (min-width: 768px) {
       .footer__inner { grid-template-columns: 2fr 1fr 1fr; }
     }
+
+    /* === Mobile Sticky Bar === */
+    .mobile-bar {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+      padding: 10px 16px; gap: 10px; z-index: 99;
+    }
+    .mobile-bar.visible { display: flex; }
+    .mobile-bar__btn {
+      flex: 1; text-align: center; padding: 12px; border-radius: var(--radius);
+      font-size: 15px; font-weight: 700; text-transform: uppercase;
+    }
+    .mobile-bar__btn--call { background: var(--color-orange); color: #fff; }
+    .mobile-bar__btn--quote { background: var(--color-green); color: #fff; }
+
+    @media (min-width: 768px) {
+      .mobile-bar { display: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -662,14 +681,44 @@
   </div>
 </footer>
 
+<div class="mobile-bar" id="mobileBar">
+  <a href="tel:2082401007" class="mobile-bar__btn mobile-bar__btn--call">Call Now</a>
+  <a href="#quote-form" class="mobile-bar__btn mobile-bar__btn--quote">Get Quote</a>
+</div>
+
 <script>
+  // Hamburger menu toggle
   const hamburger = document.getElementById('hamburger');
   const nav = document.getElementById('nav');
-  hamburger.addEventListener('click', function () {
-    const isOpen = nav.classList.toggle('open');
-    hamburger.classList.toggle('active', isOpen);
-    hamburger.setAttribute('aria-expanded', isOpen);
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    nav.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', nav.classList.contains('open'));
   });
+
+  // Close mobile nav when a link is clicked
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      nav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Mobile sticky bar: show after hero scrolls out of view
+  const hero = document.getElementById('hero');
+  const mobileBar = document.getElementById('mobileBar');
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        mobileBar.classList.remove('visible');
+      } else {
+        mobileBar.classList.add('visible');
+      }
+    },
+    { threshold: 0 }
+  );
+  observer.observe(hero);
 </script>
 
 </body>
