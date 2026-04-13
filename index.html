@@ -192,6 +192,7 @@
     .hero__subtitle { font-size: 17px; line-height: 1.6; opacity: 0.9; margin-bottom: 24px; max-width: 540px; }
     .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; }
     .hero__form {
+      display: none;
       background: var(--color-dark); border-radius: var(--radius);
       padding: 28px 24px;
     }
@@ -217,12 +218,28 @@
     .quote-form__radios label { color: #fff; font-size: 14px; display: flex; align-items: center; gap: 6px; cursor: pointer; }
     .quote-form__submit { width: 100%; margin-top: 4px; font-size: 18px; }
 
+    /* Mobile form section — visible only on mobile */
+    .mobile-form-section {
+      display: block;
+      background: var(--color-dark);
+      padding: 32px 20px;
+    }
+    .mobile-form-section .hero__form {
+      display: block;
+      max-width: 500px;
+      margin: 0 auto;
+      background: none;
+      padding: 0;
+      border-radius: 0;
+    }
+
     @media (min-width: 1024px) {
       .hero { padding: 80px 20px; min-height: 650px; }
       .hero__inner { flex-direction: row; align-items: center; gap: 48px; }
       .hero__content { flex: 1; }
       .hero__title { font-size: 48px; }
-      .hero__form { flex: 0 0 420px; }
+      .hero__form { display: block; flex: 0 0 420px; }
+      .mobile-form-section { display: none; }
     }
 
     /* === Trust Bar === */
@@ -522,6 +539,51 @@
   </div>
 </section>
 
+<section class="mobile-form-section" id="mobile-quote-form">
+  <div class="hero__form">
+    <h2 class="hero__form-title">Get a Free Quote Today!</h2>
+    <form class="quote-form">
+      <div class="quote-form__field">
+        <label for="mf-name">Name</label>
+        <input type="text" id="mf-name" name="name" placeholder="Your name" required>
+      </div>
+      <div class="quote-form__field">
+        <label for="mf-email">Email</label>
+        <input type="email" id="mf-email" name="email" placeholder="you@email.com" required>
+      </div>
+      <div class="quote-form__field">
+        <label for="mf-phone">Phone Number</label>
+        <input type="tel" id="mf-phone" name="phone" placeholder="(208) 555-1234" required>
+      </div>
+      <div class="quote-form__field">
+        <label for="mf-area">Service Area</label>
+        <input type="text" id="mf-area" name="service_area" placeholder="e.g. Idaho Falls">
+      </div>
+      <div class="quote-form__row">
+        <div class="quote-form__field">
+          <label for="mf-date">Desired Service Date</label>
+          <input type="date" id="mf-date" name="service_date">
+        </div>
+        <div class="quote-form__field">
+          <label for="mf-time">Desired Service Time</label>
+          <input type="time" id="mf-time" name="service_time">
+        </div>
+      </div>
+      <fieldset class="quote-form__field quote-form__radios">
+        <legend>Service Type</legend>
+        <label><input type="radio" name="mobile_service_type" value="construction_delivery"> Construction Delivery</label>
+        <label><input type="radio" name="mobile_service_type" value="junk_removal" checked> Junk Removal</label>
+        <label><input type="radio" name="mobile_service_type" value="dumpster_rental"> Roll Off Dumpster Rental</label>
+      </fieldset>
+      <div class="quote-form__field">
+        <label for="mf-images">Upload Images</label>
+        <input type="file" id="mf-images" name="images" accept="image/*" multiple>
+      </div>
+      <button type="submit" class="btn btn--green quote-form__submit">GET QUOTE NOW!</button>
+    </form>
+  </div>
+</section>
+
 <section class="trust-bar">
   <div class="trust-bar__inner">
     <div class="trust-bar__item">
@@ -765,6 +827,16 @@
     { threshold: 0 }
   );
   observer.observe(hero);
+
+  // On mobile, redirect #quote-form links to the mobile form section
+  document.querySelectorAll('a[href="#quote-form"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth < 1024) {
+        e.preventDefault();
+        document.getElementById('mobile-quote-form').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
 </script>
 
 </body>
