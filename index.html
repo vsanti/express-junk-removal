@@ -295,6 +295,94 @@
       .steps { grid-template-columns: repeat(3, 1fr); gap: 40px; }
       .step h3 { font-size: 20px; }
     }
+
+    /* === Service Area === */
+    .service-area { padding: 48px 20px; background: var(--color-surface); text-align: center; }
+    .service-area__inner { max-width: var(--max-width); margin: 0 auto; }
+    .service-area__text { font-size: 17px; color: var(--color-muted); max-width: 640px; margin: 0 auto 32px; }
+    .service-area__badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 32px; }
+    .badge {
+      background: var(--color-primary); color: #fff;
+      padding: 10px 24px; border-radius: 100px;
+      font-size: 15px; font-weight: 600;
+    }
+    .service-area__cta { margin-top: 8px; }
+
+    @media (min-width: 768px) {
+      .service-area { padding: 80px 20px; }
+      .badge { padding: 12px 28px; font-size: 16px; }
+    }
+
+    /* === Testimonials === */
+    .testimonials { padding: 48px 20px; background: var(--color-bg); }
+    .testimonials__inner { max-width: var(--max-width); margin: 0 auto; }
+    .testimonials__grid {
+      display: flex; gap: 20px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    .testimonial-card {
+      background: var(--color-surface); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 28px;
+      min-width: 280px; flex-shrink: 0;
+      scroll-snap-align: start;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .testimonial-card__stars { color: var(--color-orange); font-size: 18px; }
+    .testimonial-card__title { font-size: 17px; font-weight: 700; color: var(--color-text); }
+    .testimonial-card__text { font-size: 14px; color: var(--color-muted); line-height: 1.5; flex: 1; }
+    .testimonial-card__author { font-size: 14px; font-weight: 600; color: var(--color-primary); }
+
+    @media (min-width: 768px) {
+      .testimonials { padding: 80px 20px; }
+      .testimonials__grid {
+        display: grid; grid-template-columns: repeat(2, 1fr);
+        overflow: visible;
+      }
+    }
+    @media (min-width: 1024px) {
+      .testimonials__grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* === Footer CTA === */
+    .footer-cta {
+      background: var(--color-primary); padding: 48px 20px; text-align: center;
+    }
+    .footer-cta__inner { max-width: var(--max-width); margin: 0 auto; }
+    .footer-cta h2 { color: #fff; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .footer-cta p { color: rgba(255,255,255,0.8); font-size: 17px; margin-bottom: 24px; }
+    .footer-cta__buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+    @media (min-width: 768px) {
+      .footer-cta { padding: 80px 20px; }
+      .footer-cta h2 { font-size: 36px; }
+    }
+
+    /* === Footer === */
+    .footer { background: #111827; color: #ccc; padding: 48px 20px 0; }
+    .footer__inner {
+      max-width: var(--max-width); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: 32px;
+      padding-bottom: 40px;
+    }
+    .footer__logo { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .footer__desc { font-size: 14px; line-height: 1.6; color: #9CA3AF; }
+    .footer h4 { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+    .footer__areas-title { margin-top: 16px; }
+    .footer__areas { font-size: 14px; color: #9CA3AF; }
+    .footer ul { display: flex; flex-direction: column; gap: 8px; }
+    .footer a { color: #9CA3AF; font-size: 14px; transition: color 0.2s; }
+    .footer a:hover { color: var(--color-green); }
+    .footer__bottom {
+      border-top: 1px solid #1F2937; padding: 20px 0; text-align: center;
+      max-width: var(--max-width); margin: 0 auto;
+    }
+    .footer__bottom p { font-size: 13px; color: #6B7280; }
+
+    @media (min-width: 768px) {
+      .footer__inner { grid-template-columns: 2fr 1fr 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -483,6 +571,96 @@
     </div>
   </div>
 </section>
+
+<section class="service-area">
+  <div class="service-area__inner">
+    <h2 class="section-title">Serving East Idaho</h2>
+    <p class="service-area__text">Proudly serving contractors and homeowners across East Idaho. From Pocatello to Rexburg, we deliver materials and remove junk on your schedule.</p>
+    <div class="service-area__badges">
+      <span class="badge">Idaho Falls</span>
+      <span class="badge">Rigby</span>
+      <span class="badge">Pocatello</span>
+      <span class="badge">Rexburg</span>
+      <span class="badge">Shelley</span>
+      <span class="badge">Blackfoot</span>
+    </div>
+    <a href="tel:2082401007" class="btn btn--outline service-area__cta">See If We Serve Your Area — Call (208) 240-1007</a>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="testimonials__inner">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <div class="testimonials__grid">
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3 class="testimonial-card__title">Very Impressed</h3>
+        <p class="testimonial-card__text">They were in and out quickly, efficiently, and sent me photos of the completed work. Very highly recommend!</p>
+        <p class="testimonial-card__author">— Jared Duncan</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3 class="testimonial-card__title">Professional</h3>
+        <p class="testimonial-card__text">Thorough, efficient, and very reasonably priced. I highly recommend them for garage cleanouts and appliance disposal.</p>
+        <p class="testimonial-card__author">— Leslie Hartley</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3 class="testimonial-card__title">Super Fast</h3>
+        <p class="testimonial-card__text">Jose did an amazing job removing junk from the basement and garage. Affordable and done super fast!</p>
+        <p class="testimonial-card__author">— Autumn Roseberg</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <h3 class="testimonial-card__title">Quick &amp; Efficient</h3>
+        <p class="testimonial-card__text">Quick to provide a quote and had it done within a day. I will be referring them to future clients, no questions asked!</p>
+        <p class="testimonial-card__author">— Amanda McFarland</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-cta">
+  <div class="footer-cta__inner">
+    <h2>Ready to Get Started?</h2>
+    <p>Call for a free estimate or submit a quote request online.</p>
+    <div class="footer-cta__buttons">
+      <a href="tel:2082401007" class="btn btn--green">Call (208) 240-1007</a>
+      <a href="#quote-form" class="btn btn--white-outline">Get Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__col">
+      <p class="footer__logo">Express Junk Removal</p>
+      <p class="footer__desc">East Idaho's trusted full-service hauling and delivery company. Construction material delivery and junk removal for contractors and homeowners.</p>
+    </div>
+    <div class="footer__col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="https://expressjunk-removal.com/about-us/">About Us</a></li>
+        <li><a href="#services">Construction Delivery</a></li>
+        <li><a href="#services">Junk Removal</a></li>
+        <li><a href="https://expressjunk-removal.com/contact-us/">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:2082401007">(208) 240-1007</a></li>
+        <li><a href="mailto:expressjunkremoval208@gmail.com">expressjunkremoval208@gmail.com</a></li>
+      </ul>
+      <h4 class="footer__areas-title">Service Areas</h4>
+      <p class="footer__areas">Idaho Falls &bull; Rigby &bull; Pocatello &bull; Rexburg &bull; Shelley &bull; Blackfoot</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>&copy; 2026 Express Junk Removal. Locally owned &amp; operated in East Idaho.</p>
+  </div>
+</footer>
 
 <script>
   const hamburger = document.getElementById('hamburger');
