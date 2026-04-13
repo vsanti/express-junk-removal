@@ -105,6 +105,7 @@
       padding: 0 20px; height: 64px;
     }
     .header__logo { font-size: 20px; font-weight: 700; color: var(--color-primary); white-space: nowrap; }
+    .header__logo-img { height: 40px; width: auto; filter: brightness(0) saturate(100%); }
     .header__nav { display: none; }
     .header__menu { display: flex; gap: 28px; }
     .header__menu > li > a { font-size: 15px; font-weight: 600; color: var(--color-text); transition: color 0.2s; }
@@ -168,7 +169,7 @@
     /* === Hero === */
     .hero {
       position: relative;
-      background: linear-gradient(135deg, #1a1a2e 0%, #1b3a5c 50%, #2c5f8a 100%);
+      background: url('https://expressjunk-removal.com/wp-content/uploads/2024/04/banner.png') center/cover no-repeat;
       min-height: 600px;
       display: flex; align-items: center;
       padding: 48px 20px;
@@ -266,6 +267,8 @@
       background: var(--color-green);
     }
     .service-card .btn { align-self: flex-start; margin-top: auto; }
+    .service-card__image { margin: -32px -32px 16px -32px; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; }
+    .service-card__image img { width: 100%; height: 200px; object-fit: cover; display: block; }
 
     @media (min-width: 768px) {
       .services { padding: 80px 20px; }
@@ -402,13 +405,34 @@
     @media (min-width: 768px) {
       .mobile-bar { display: none !important; }
     }
+
+    /* === Mission === */
+    .mission { padding: 48px 20px; background: var(--color-surface); }
+    .mission__inner {
+      max-width: var(--max-width); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: 32px;
+      align-items: center;
+    }
+    .mission__image { border-radius: var(--radius); overflow: hidden; }
+    .mission__image img { width: 100%; height: 300px; object-fit: cover; display: block; }
+    .mission__content p { font-size: 17px; color: var(--color-muted); margin-bottom: 16px; line-height: 1.7; }
+    .mission__content strong { color: var(--color-text); }
+
+    @media (min-width: 768px) {
+      .mission { padding: 80px 20px; }
+      .mission__inner { grid-template-columns: 1fr 1fr; gap: 48px; }
+      .mission__image img { height: 350px; }
+    }
+
+    /* === Footer logo image === */
+    .footer__logo-img { height: 45px; width: auto; margin-bottom: 12px; }
   </style>
 </head>
 <body>
 
 <header class="header" id="header">
   <div class="header__inner">
-    <a href="/" class="header__logo">Express Junk Removal</a>
+    <a href="/" class="header__logo"><img src="https://expressjunk-removal.com/wp-content/uploads/2024/04/logo-white-2.png" alt="Express Junk Removal" class="header__logo-img"></a>
     <nav class="header__nav" id="nav" aria-label="Main navigation">
       <ul class="header__menu">
         <li><a href="/">Home</a></li>
@@ -525,6 +549,9 @@
     <h2 class="section-title">Our Services</h2>
     <div class="services__grid">
       <div class="service-card">
+        <div class="service-card__image">
+          <img src="https://expressjunk-removal.com/wp-content/uploads/2024/04/commercial-construction-site-houston-cleanup.webp" alt="Construction site cleanup and material delivery in East Idaho" loading="lazy">
+        </div>
         <div class="service-card__icon">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/><path d="M5 3 L3 10 L13 10 L11 3" opacity="0.4"/></svg>
         </div>
@@ -541,6 +568,9 @@
         <a href="#quote-form" class="btn btn--green">Request Delivery Quote</a>
       </div>
       <div class="service-card">
+        <div class="service-card__image">
+          <img src="https://expressjunk-removal.com/wp-content/uploads/2024/04/istockphoto-1079751650-612x612-1.jpg" alt="Junk removal service clearing residential space in East Idaho" loading="lazy">
+        </div>
         <div class="service-card__icon">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 6 21 18 21 19 6 21 6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
         </div>
@@ -587,6 +617,19 @@
         <h3>We Deliver or Remove</h3>
         <p>Our crew arrives on time and gets the job done right.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="mission">
+  <div class="mission__inner">
+    <div class="mission__image">
+      <img src="https://expressjunk-removal.com/wp-content/uploads/2024/04/pile-scrap-metal-ready-recycling-created-with-generative-ai.jpg" alt="Eco-friendly recycling and scrap metal processing" loading="lazy">
+    </div>
+    <div class="mission__content">
+      <h2 class="section-title" style="text-align:left;">Our Mission</h2>
+      <p>At Express Junk Removal, our mission is simple: clear clutter, restore space, and exceed expectations with efficient, eco-friendly services. Whether we're delivering construction materials to your job site or hauling away junk, we treat every job with the same professionalism and care.</p>
+      <p><strong>We recycle whenever possible</strong> — keeping East Idaho clean isn't just our job, it's our responsibility.</p>
     </div>
   </div>
 </section>
@@ -653,7 +696,7 @@
 <footer class="footer">
   <div class="footer__inner">
     <div class="footer__col">
-      <p class="footer__logo">Express Junk Removal</p>
+      <img src="https://expressjunk-removal.com/wp-content/uploads/2024/04/logo-white-2.png" alt="Express Junk Removal" class="footer__logo-img">
       <p class="footer__desc">East Idaho's trusted full-service hauling and delivery company. Construction material delivery and junk removal for contractors and homeowners.</p>
     </div>
     <div class="footer__col">
