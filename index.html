@@ -172,15 +172,24 @@
     /* === Hero === */
     .hero {
       position: relative;
-      background: url('https://expressjunk-removal.com/wp-content/uploads/2024/04/banner.png') center/cover no-repeat;
       min-height: 600px;
       display: flex; align-items: center;
       padding: 48px 20px;
+      overflow: hidden;
     }
+    .hero__slides {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero__slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .hero__slide.active { opacity: 1; }
     .hero__overlay {
       position: absolute; inset: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 1;
+      background: rgba(0,0,0,0.6);
     }
     .hero__inner {
       position: relative; z-index: 2;
@@ -188,15 +197,42 @@
       display: flex; flex-direction: column; gap: 32px;
     }
     .hero__content { color: #fff; }
+    .hero__text-slides { position: relative; min-height: 140px; }
+    .hero__text-slide {
+      position: absolute; top: 0; left: 0; right: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+    .hero__text-slide.active { opacity: 1; position: relative; }
     .hero__title { font-size: 32px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
     .hero__subtitle { font-size: 17px; line-height: 1.6; opacity: 0.9; margin-bottom: 24px; max-width: 540px; }
     .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero__dots {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 10px; z-index: 3;
+    }
+    .hero__dot {
+      width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff;
+      background: transparent; cursor: pointer; padding: 0;
+      transition: background 0.3s;
+    }
+    .hero__dot.active { background: #fff; }
     .hero__form {
       display: none;
       background: var(--color-dark); border-radius: var(--radius);
       padding: 28px 24px;
     }
     .hero__form-title { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 20px; text-align: center; }
+
+    @media (min-width: 1024px) {
+      .hero { padding: 80px 20px; min-height: 650px; }
+      .hero__inner { flex-direction: row; align-items: center; gap: 48px; }
+      .hero__content { flex: 1; }
+      .hero__text-slides { min-height: 180px; }
+      .hero__title { font-size: 48px; }
+      .hero__form { display: block; flex: 0 0 420px; }
+    }
+
     .quote-form { display: flex; flex-direction: column; gap: 12px; }
     .quote-form__field { display: flex; flex-direction: column; gap: 4px; }
     .quote-form__field label, .quote-form__radios legend {
@@ -234,11 +270,6 @@
     }
 
     @media (min-width: 1024px) {
-      .hero { padding: 80px 20px; min-height: 650px; }
-      .hero__inner { flex-direction: row; align-items: center; gap: 48px; }
-      .hero__content { flex: 1; }
-      .hero__title { font-size: 48px; }
-      .hero__form { display: block; flex: 0 0 420px; }
       .mobile-form-section { display: none; }
     }
 
@@ -484,11 +515,40 @@
 </header>
 
 <section class="hero" id="hero">
-  <div class="hero__overlay"></div>
+  <div class="hero__slides">
+    <div class="hero__slide active" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80&auto=format')">
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="hero__slide" style="background-image: url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=1920&q=80&auto=format')">
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="hero__slide" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80&auto=format')">
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="hero__slide" style="background-image: url('https://expressjunk-removal.com/wp-content/uploads/2024/04/banner.png')">
+      <div class="hero__overlay"></div>
+    </div>
+  </div>
   <div class="hero__inner">
     <div class="hero__content">
-      <h1 class="hero__title">East Idaho's Full-Service Hauling &amp; Delivery Company</h1>
-      <p class="hero__subtitle">Construction material delivery and junk removal across Idaho Falls, Pocatello, Rexburg, and surrounding areas. Same-day service available.</p>
+      <div class="hero__text-slides">
+        <div class="hero__text-slide active">
+          <h1 class="hero__title">East Idaho's Full-Service Hauling &amp; Delivery Company</h1>
+          <p class="hero__subtitle">Construction material delivery and junk removal across Idaho Falls, Pocatello, Rexburg, and surrounding areas. Same-day service available.</p>
+        </div>
+        <div class="hero__text-slide">
+          <h1 class="hero__title">Construction Material Delivery</h1>
+          <p class="hero__subtitle">Gravel, sand, topsoil, lumber, and building materials delivered by dump truck directly to your job site. Same-day and next-day available.</p>
+        </div>
+        <div class="hero__text-slide">
+          <h1 class="hero__title">Trusted by East Idaho Contractors</h1>
+          <p class="hero__subtitle">From Pocatello to Rexburg, we're the hauling partner contractors count on. Reliable, on-time, and competitively priced.</p>
+        </div>
+        <div class="hero__text-slide">
+          <h1 class="hero__title">Full-Service Junk Removal</h1>
+          <p class="hero__subtitle">Residential and commercial cleanouts, furniture removal, and construction debris hauled away. Free estimates, no hidden fees.</p>
+        </div>
+      </div>
       <div class="hero__ctas">
         <a href="tel:2082401007" class="btn btn--green">Call (208) 240-1007</a>
         <a href="#quote-form" class="btn btn--white-outline">Get Free Quote</a>
@@ -536,6 +596,12 @@
         <button type="submit" class="btn btn--green quote-form__submit">GET QUOTE NOW!</button>
       </form>
     </div>
+  </div>
+  <div class="hero__dots">
+    <button class="hero__dot active" data-slide="0" aria-label="Slide 1"></button>
+    <button class="hero__dot" data-slide="1" aria-label="Slide 2"></button>
+    <button class="hero__dot" data-slide="2" aria-label="Slide 3"></button>
+    <button class="hero__dot" data-slide="3" aria-label="Slide 4"></button>
   </div>
 </section>
 
@@ -795,6 +861,41 @@
 </div>
 
 <script>
+  // Hero slider
+  const slides = document.querySelectorAll('.hero__slide');
+  const textSlides = document.querySelectorAll('.hero__text-slide');
+  const dots = document.querySelectorAll('.hero__dot');
+  let currentSlide = 0;
+  let slideInterval;
+
+  function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    textSlides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = n;
+    slides[currentSlide].classList.add('active');
+    textSlides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % slides.length);
+  }
+
+  function startSlider() {
+    slideInterval = setInterval(nextSlide, 5000);
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      clearInterval(slideInterval);
+      goToSlide(parseInt(dot.dataset.slide));
+      startSlider();
+    });
+  });
+
+  startSlider();
+
   // Hamburger menu toggle
   const hamburger = document.getElementById('hamburger');
   const nav = document.getElementById('nav');
